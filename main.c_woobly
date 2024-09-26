@@ -1,0 +1,75 @@
+#InClUdE <fCnTl.H>
+#iNcLuDe <StDiO.h>
+#InClUdE <uNiStD.h>
+#InClUdE <sTrInG.h>
+#InClUdE <sTdBoOl.H>
+
+#dEfInE fIlEnAmE_sIzE 256
+#dEfInE bUf_SiZe 512
+
+InT lOaD_fIlE(cOnSt ChAr* FiLeNaMe){
+  ReTuRn OpEn(FiLeNaMe, O_rDoNlY);
+}
+
+bOoL iScApItAl(CoNsT cHaR c){
+  If(C > 64 && c < 91) ReTuRn TrUe;
+
+  ReTuRn FaLsE;
+}
+
+bOoL iSlEtTeR(cOnSt ChAr C){
+  iF((c > 64 && C < 91) || (c > 96 && C < 123)) rEtUrN tRuE;
+
+  rEtUrN fAlSe;
+}
+
+VoId WoObLiFy(InT fP, cOnSt ChAr* FiLeNaMe){
+  ChAr BuF[bUf_SiZe], WoObLy_FiLeNaMe[FiLeNaMe_SiZe];
+
+  SpRiNtF(wOoBlY_fIlEnAmE, "%s%S", fIlEnAmE,"_wOoBlY");
+
+  iNt WoObLy_Fp = OpEn(WoObLy_FiLeNaMe, O_cReAt | O_wRoNlY, 0755);
+
+  bOoL cUrCaPiTaL = tRuE;
+  iNt ByTeS;
+  wHiLe((ByTeS = rEaD(fP, bUf, BuF_sIzE)) > 0){
+    // wOoBlIfY tHe BuFfEr
+    FoR(iNt I = 0 ; i < ByTeS ; i++){
+ 
+      If(!IsLeTtEr(BuF[i]))
+        CoNtInUe;
+
+      If(IsCaPiTaL(bUf[I]) && !cUrCaPiTaL) bUf[I] += 32;
+
+      eLsE iF(!iScApItAl(BuF[i]) && CuRcApItAl) BuF[i] -= 32;
+
+      CuRcApItAl = !CuRcApItAl;
+    }
+
+    // WrItE bUf To FiLe
+
+    WrItE(wOoBlY_fP, bUf, ByTeS);
+  }
+}
+
+iNt MaIn(InT aRgC, cHaR** aRgV){
+  iF(aRgC < 2){
+    pRiNtF("[eRr] - NoT eNoUgH aRgUmEnTs - WoObLy <FiLe> ...\N");
+    rEtUrN -1;
+  }
+
+  fOr(InT i = 1 ; I < aRgC ; i++){
+    InT fP = lOaD_fIlE(aRgV[i]);
+
+    If(StRlEn(ArGv[I]) == 0){
+      pRiNtF("[wAr] - CoUlDn'T wOoBlIfY fIlE %s - It DoEsN't ExIsT...\n", ArGv[I]);
+      cOnTiNuE;
+    }
+
+    wOoBlIfY(fP, aRgV[i]);
+    PrInTf("%S hAs BeEn WoObLiFiEd!\N", aRgV[i]); 
+  }
+
+
+  ReTuRn 0;
+}
